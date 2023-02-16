@@ -14,7 +14,7 @@ Content-Type: application/json
 Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 
 {
-  "title": "седьмое объявление",
+  "title": "8-е объявление первого пользователя",
   "description": "Срочно"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 ###
 
 # фильтрация по дате
-GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
+GET {{baseUrl}}/advertisements/?created_at_before=2023-02-15
 Content-Type: application/json
 
 ###
@@ -49,7 +49,7 @@ Content-Type: application/json
 Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce
 
 {
-  "title": "Стол Hoff",
+  "title": "Новая тумбочка Hoff",
   "description": "Срочно продам"
 }
 
@@ -61,13 +61,19 @@ Content-Type: application/json
 Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce
 
 {
-  "status": "OPEN"
+  "status": "CLOSED"
 }
 
 ###
 
 # запрос конкретного объявления
 
-GET {{baseUrl}}/advertisements/2/
+GET {{baseUrl}}/advertisements/3/
 Content-Type: application/json
 #Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce
+
+###
+
+# фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=CLOSED
+Content-Type: application/json

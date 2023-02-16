@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
+from advertisements.filters import AdvertisementFilter
 from advertisements.models import Advertisement
 from advertisements.permissions import IsOwnerOrReadonly
 from advertisements.serializers import AdvertisementSerializer
@@ -17,11 +18,12 @@ class AdvertisementViewSet(ModelViewSet):
     serializer_class = AdvertisementSerializer
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['creator', 'status', 'created_at']
-    search_fields = []  # требуется дозаполнить
-    ordering_fields = []  # требуется дозаполнить
+    filterset_class = AdvertisementFilter
+    # filterset_fields = ['creator', 'status', 'created_at']
+    # search_fields = []  # требуется заполнить по необходимости
+    # ordering_fields = []  # требуется заполнить по необходимости
 
-    permission_classes = [IsOwnerOrReadonly]  # требуется дозаполнить
+    permission_classes = [IsOwnerOrReadonly]
     # authentication_classes = [TokenAuthentication]  # параметр обозначен в settings.py
     # pagination_class = PageNumberPagination  # параметр обозначен в settings.py
 
@@ -31,11 +33,7 @@ class AdvertisementViewSet(ModelViewSet):
 
         if self.action == "create":
             return [IsAuthenticated()]
-        elif self.action in ["update", "partial_update"]:
-            return [IsOwnerOrReadonly()]
+        elif self.action in ["update", "partial_update", "delete"]:
+            return [IsAuthenticated(), IsOwnerOrReadonly()]
         return []
-
-    def perform_create(self, serializer):
-        serializer.save(username=self.request.creator.username)
-
 
