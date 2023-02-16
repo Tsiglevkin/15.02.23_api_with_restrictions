@@ -14,7 +14,7 @@ Content-Type: application/json
 Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 
 {
-  "title": "Стол IKEA",
+  "title": "седьмое объявление",
   "description": "Срочно"
 }
 
@@ -32,7 +32,7 @@ Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 ###
 
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=1
+GET {{baseUrl}}/advertisements/?creator=2
 Content-Type: application/json
 
 ###
@@ -40,3 +40,34 @@ Content-Type: application/json
 # фильтрация по дате
 GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
 Content-Type: application/json
+
+###
+
+# создание объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce
+
+{
+  "title": "Стол Hoff",
+  "description": "Срочно продам"
+}
+
+###
+
+# попытка поменять объявление другим пользователем
+PATCH {{baseUrl}}/advertisements/1/
+Content-Type: application/json
+Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce
+
+{
+  "status": "OPEN"
+}
+
+###
+
+# запрос конкретного объявления
+
+GET {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+#Authorization: Token 6ef25d7078ccdedfbef373b6ba9079ff9a9547ce

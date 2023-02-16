@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'first_name',
                   'last_name',)
+        read_only_fields = ['username']  # добавил свойство для работы с токеном
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -39,7 +40,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
     def validate_data(self, data):
-        """Метод для валидации. Вызывается при создании и обновлении."""
+        """Метод для валидации. Вызывается при создании и обновлении.""" # метод не проверен.
 
         open_counter = 0
         for adv in data:
@@ -48,3 +49,5 @@ class AdvertisementSerializer(serializers.ModelSerializer):
                 if open_counter > 10:
                     raise ValidationError('У Вас не может быть более 10 открытых объявлений.')
         return data
+
+
