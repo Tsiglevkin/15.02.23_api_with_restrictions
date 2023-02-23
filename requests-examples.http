@@ -21,7 +21,7 @@ Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/1/
+PATCH {{baseUrl}}/advertisements/8/
 Content-Type: application/json
 Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 
@@ -31,8 +31,15 @@ Authorization: Token a87af1d45cd3f401ee18f9eb6073a710bf0e03f4
 
 ###
 
+# фильтрация по создателю и статусу
+GET {{baseUrl}}/advertisements/?creator=1&status=OPEN
+Content-Type: application/json
+
+
+###
+
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=2
+GET {{baseUrl}}/advertisements/?creator=1
 Content-Type: application/json
 
 ###
