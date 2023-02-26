@@ -48,6 +48,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
         elif request_method in ['PATCH', 'PUT']:  # если обновляем, то проверяем текущий статус и реагируем, если
             new_status = data.get('status')  # пытаемся открыть лишнее.
+
             if new_status == 'OPEN':
                 current_status = self.instance.status
                 if current_status == 'CLOSED' and open_adv_count >= 10:
